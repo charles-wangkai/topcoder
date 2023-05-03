@@ -1,8 +1,6 @@
 import java.util.Arrays;
 
 public class BoxUnion {
-  static final int LIMIT = 20000;
-
   public int area(String[] rectangles) {
     Rectangle[] rects =
         Arrays.stream(rectangles)
