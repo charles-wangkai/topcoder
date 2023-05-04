@@ -41,12 +41,12 @@ public class AlternateOddEven {
         result += (digits[i] + 1) / 2 * pow5(s.length() - i - 1);
 
         break;
-      } else {
-        result += digits[i] / 2 * pow5(s.length() - i - 1);
+      }
 
-        if (i == s.length() - 1) {
-          ++result;
-        }
+      result += digits[i] / 2 * pow5(s.length() - i - 1);
+
+      if (i == s.length() - 1) {
+        ++result;
       }
     }
 
