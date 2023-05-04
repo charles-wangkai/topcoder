@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class AnnoyingPasswords {
   static final int MODULUS = 1_000_000_007;
@@ -40,20 +41,15 @@ public class AnnoyingPasswords {
   }
 
   int addMod(int x, int y) {
-    return (x + y) % MODULUS;
+    return Math.floorMod(x + y, MODULUS);
   }
 
   int multiplyMod(int x, int y) {
-    return (int) ((long) x * y % MODULUS);
+    return Math.floorMod((long) x * y, MODULUS);
   }
 
   int P(int n, int r) {
-    int result = 1;
-    for (int i = 0; i < r; ++i) {
-      result = multiplyMod(result, n - i);
-    }
-
-    return result;
+    return IntStream.range(0, r).reduce(1, (acc, i) -> multiplyMod(acc, n - i));
   }
 
   // BEGIN KAWIGIEDIT TESTING
