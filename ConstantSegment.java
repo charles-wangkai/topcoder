@@ -10,9 +10,7 @@ public class ConstantSegment {
     int result = Integer.MAX_VALUE;
     Map<Integer, List<Integer>> problemToIndices = new HashMap<>();
     for (int i = 0; i < P.length; ++i) {
-      if (!problemToIndices.containsKey(P[i])) {
-        problemToIndices.put(P[i], new ArrayList<>());
-      }
+      problemToIndices.putIfAbsent(P[i], new ArrayList<>());
       problemToIndices.get(P[i]).add(i);
 
       List<Integer> indices = problemToIndices.get(P[i]);
@@ -28,7 +26,9 @@ public class ConstantSegment {
     int[] P = new int[N];
 
     int L = Pprefix.length;
-    for (int i = 0; i < L; ++i) P[i] = Pprefix[i];
+    for (int i = 0; i < L; ++i) {
+      P[i] = Pprefix[i];
+    }
 
     long state = seed;
     for (int i = L; i < N; ++i) {
