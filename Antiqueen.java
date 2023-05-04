@@ -4,9 +4,9 @@ public class Antiqueen {
   static final int MODULUS = 1_000_000_007;
 
   public int countPaths(int R, int C, int N) {
-    int[][] wayNums = new int[R][C];
+    int[][] dp = new int[R][C];
     for (int r = 0; r < R; ++r) {
-      Arrays.fill(wayNums[r], 1);
+      Arrays.fill(dp[r], 1);
     }
 
     for (int i = 0; i < N; ++i) {
@@ -17,35 +17,35 @@ public class Antiqueen {
       int[] diagonalSums2 = new int[R + C - 1];
       for (int r = 0; r < R; ++r) {
         for (int c = 0; c < C; ++c) {
-          total = addMod(total, wayNums[r][c]);
-          rowSums[r] = addMod(rowSums[r], wayNums[r][c]);
-          colSums[c] = addMod(colSums[c], wayNums[r][c]);
-          diagonalSums1[r + c] = addMod(diagonalSums1[r + c], wayNums[r][c]);
-          diagonalSums2[r - c + (C - 1)] = addMod(diagonalSums2[r - c + (C - 1)], wayNums[r][c]);
+          total = addMod(total, dp[r][c]);
+          rowSums[r] = addMod(rowSums[r], dp[r][c]);
+          colSums[c] = addMod(colSums[c], dp[r][c]);
+          diagonalSums1[r + c] = addMod(diagonalSums1[r + c], dp[r][c]);
+          diagonalSums2[r - c + (C - 1)] = addMod(diagonalSums2[r - c + (C - 1)], dp[r][c]);
         }
       }
 
-      int[][] nextWayNums = new int[R][C];
+      int[][] nextDp = new int[R][C];
       for (int r = 0; r < R; ++r) {
         for (int c = 0; c < C; ++c) {
-          nextWayNums[r][c] =
+          nextDp[r][c] =
               addMod(
-                  subtractMod(
+                  addMod(
                       total,
-                      addMod(
+                      -addMod(
                           addMod(rowSums[r], colSums[c]),
                           addMod(diagonalSums1[r + c], diagonalSums2[r - c + (C - 1)]))),
-                  multiplyMod(3, wayNums[r][c]));
+                  multiplyMod(3, dp[r][c]));
         }
       }
 
-      wayNums = nextWayNums;
+      dp = nextDp;
     }
 
     int result = 0;
     for (int r = 0; r < R; ++r) {
       for (int c = 0; c < C; ++c) {
-        result = addMod(result, wayNums[r][c]);
+        result = addMod(result, dp[r][c]);
       }
     }
 
@@ -53,15 +53,11 @@ public class Antiqueen {
   }
 
   int addMod(int x, int y) {
-    return (x + y) % MODULUS;
-  }
-
-  int subtractMod(int x, int y) {
-    return (x - y + MODULUS) % MODULUS;
+    return Math.floorMod(x + y, MODULUS);
   }
 
   int multiplyMod(int x, int y) {
-    return (int) ((long) x * y % MODULUS);
+    return Math.floorMod((long) x * y, MODULUS);
   }
 
   // BEGIN KAWIGIEDIT TESTING
