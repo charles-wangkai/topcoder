@@ -8,7 +8,7 @@ public class HIndex {
         Arrays.stream(realCitations)
             .boxed()
             .sorted(Comparator.reverseOrder())
-            .mapToInt(x -> x)
+            .mapToInt(Integer::intValue)
             .toArray();
 
     int result = -1;
