@@ -5,11 +5,11 @@ import java.util.List;
 public class IncorrectCancellation {
   public int find(int D) {
     String s = String.valueOf(D);
-    for (int code = 1; code < (1 << s.length()) - 1; ++code) {
+    for (int mask = 1; mask < (1 << s.length()) - 1; ++mask) {
       List<Character> crossed = new ArrayList<>();
       StringBuilder rest = new StringBuilder();
       for (int i = 0; i < s.length(); ++i) {
-        if ((code & (1 << i)) != 0) {
+        if (((mask >> i) & 1) == 1) {
           rest.append(s.charAt(i));
         } else {
           crossed.add(s.charAt(i));
@@ -40,8 +40,8 @@ public class IncorrectCancellation {
 
     List<Character> diff = new ArrayList<>();
     int beginIndex = 0;
-    for (char ch : strReducedN.toCharArray()) {
-      int index = strN.indexOf(ch, beginIndex);
+    for (char c : strReducedN.toCharArray()) {
+      int index = strN.indexOf(c, beginIndex);
       if (index == -1) {
         return null;
       }
