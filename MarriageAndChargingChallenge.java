@@ -13,7 +13,7 @@ public class MarriageAndChargingChallenge {
     int index = startIndex;
     for (int i = 0; i < relative.length; ++i) {
       int nextIndex = (index + 1) % relative.length;
-      int distance = (relative[nextIndex] - relative[index] + forumLength) % forumLength;
+      int distance = Math.floorMod(relative[nextIndex] - relative[index], forumLength);
       if (distance == 0) {
         distance = forumLength;
       }
