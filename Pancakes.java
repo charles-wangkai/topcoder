@@ -8,20 +8,24 @@ public class Pancakes {
     if (N <= P) {
       return new String[] {
         IntStream.range(0, P)
-            .mapToObj(i -> (i < N) ? String.valueOf((char) ('A' + i)) : "-")
+            .mapToObj(i -> (i < N) ? (char) ('A' + i) : '-')
+            .map(String::valueOf)
             .collect(Collectors.joining()),
         IntStream.range(0, P)
-            .mapToObj(i -> (i < N) ? String.valueOf((char) ('a' + i)) : "-")
+            .mapToObj(i -> (i < N) ? (char) ('a' + i) : '-')
+            .map(String::valueOf)
             .collect(Collectors.joining())
       };
     }
 
     String sequence =
         IntStream.range(0, N)
-                .mapToObj(i -> String.valueOf((char) ('A' + i)))
+                .mapToObj(i -> (char) ('A' + i))
+                .map(String::valueOf)
                 .collect(Collectors.joining())
             + IntStream.range(0, N)
-                .mapToObj(i -> String.valueOf((char) ('a' + i)))
+                .mapToObj(i -> (char) ('a' + i))
+                .map(String::valueOf)
                 .collect(Collectors.joining());
     int index = 0;
     List<String> result = new ArrayList<>();
@@ -35,7 +39,7 @@ public class Pancakes {
       index += P;
     }
 
-    return result.toArray(new String[0]);
+    return result.toArray(String[]::new);
   }
 
   // BEGIN KAWIGIEDIT TESTING
