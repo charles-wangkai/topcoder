@@ -9,7 +9,7 @@ public class TwoDimensionalSort {
 
   public int[] sortLetters(String[] board) {
     List<Integer> result = new ArrayList<>();
-    Map<Character, int[]> rookToPos = new HashMap<>();
+    Map<Character, Position> rookToPosition = new HashMap<>();
 
     int beginC = 0;
     for (int r = 0; r < SIZE; ++r) {
@@ -29,7 +29,7 @@ public class TwoDimensionalSort {
           result.add(r);
           result.add(beginC + i);
 
-          rookToPos.put(board[r].charAt(rookCs[i]), new int[] {r, beginC + i});
+          rookToPosition.put(board[r].charAt(rookCs[i]), new Position(r, beginC + i));
         }
         for (int i = centerIndex + 1; i < rookCs.length; ++i) {
           result.add(r);
@@ -37,23 +37,23 @@ public class TwoDimensionalSort {
           result.add(r);
           result.add(beginC + i);
 
-          rookToPos.put(board[r].charAt(rookCs[i]), new int[] {r, beginC + i});
+          rookToPosition.put(board[r].charAt(rookCs[i]), new Position(r, beginC + i));
         }
 
         beginC = endC + 1;
       }
     }
 
-    for (char rook : rookToPos.keySet()) {
-      int[] pos = rookToPos.get(rook);
+    for (char rook : rookToPosition.keySet()) {
+      Position position = rookToPosition.get(rook);
 
-      result.add(pos[0]);
-      result.add(pos[1]);
+      result.add(position.r);
+      result.add(position.c);
       result.add(rook - 'A');
-      result.add(pos[1]);
+      result.add(position.c);
     }
 
-    return result.stream().mapToInt(x -> x).toArray();
+    return result.stream().mapToInt(Integer::intValue).toArray();
   }
 
   boolean check(int beginC, int endC, int[] rookCs, int centerIndex) {
@@ -61,11 +61,22 @@ public class TwoDimensionalSort {
 
     if (rookCs[centerIndex] < target) {
       return centerIndex + 1 == rookCs.length || rookCs[centerIndex + 1] > target;
-    } else if (rookCs[centerIndex] > target) {
+    }
+    if (rookCs[centerIndex] > target) {
       return centerIndex == 0 || rookCs[centerIndex - 1] < target;
     }
 
     return true;
+  }
+
+  class Position {
+    int r;
+    int c;
+
+    Position(int r, int c) {
+      this.r = r;
+      this.c = c;
+    }
   }
 
   // BEGIN KAWIGIEDIT TESTING
