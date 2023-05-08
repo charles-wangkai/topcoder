@@ -29,7 +29,7 @@ public class SkyscraperCounting {
   }
 
   static int multiplyMod(int x, int y) {
-    return (int) Math.floorMod((long) x * y, MODULUS);
+    return Math.floorMod((long) x * y, MODULUS);
   }
 
   // BEGIN KAWIGIEDIT TESTING
