@@ -24,7 +24,8 @@ public class RearrangeAndIncrement {
               String.valueOf(current)
                   .chars()
                   .sorted()
-                  .mapToObj(c -> String.valueOf((char) c))
+                  .mapToObj(c -> (char) c)
+                  .map(String::valueOf)
                   .collect(Collectors.joining()));
     }
 
@@ -51,7 +52,7 @@ public class RearrangeAndIncrement {
       }
     }
 
-    return result.stream().mapToInt(x -> x).toArray();
+    return result.stream().mapToInt(Integer::intValue).toArray();
   }
 
   void search(List<Integer> result, int target) {
@@ -72,8 +73,8 @@ public class RearrangeAndIncrement {
                     .chars()
                     .boxed()
                     .sorted(Comparator.reverseOrder())
-                    .mapToInt(x -> x)
-                    .mapToObj(c -> String.valueOf((char) c))
+                    .map(c -> (char) c.intValue())
+                    .map(String::valueOf)
                     .collect(Collectors.joining()));
         result.add(current);
       }
