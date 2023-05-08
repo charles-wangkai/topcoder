@@ -14,11 +14,7 @@ public class PlugStuffIn {
       sockets.add(gadgets.length);
     } else {
       for (int i = 0; i < cordIndices.length; ++i) {
-        if (i == 0) {
-          result[cordIndices[i]] = gadgets.length;
-        } else {
-          result[cordIndices[i]] = cordIndices[i - 1];
-        }
+        result[cordIndices[i]] = (i == 0) ? gadgets.length : cordIndices[i - 1];
 
         for (int j = 0;
             j < gadgets[cordIndices[i]] - ((i == cordIndices.length - 1) ? 0 : 1);
