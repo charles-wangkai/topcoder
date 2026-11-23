@@ -32,6 +32,6 @@ public class Encrypt {
 
     return "%c%c".formatted(MATRIX[p1.r()][p2.c()], MATRIX[p2.r()][p1.c()]);
   }
-}
 
-record Point(int r, int c) {}
+  record Point(int r, int c) {}
+}
