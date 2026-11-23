@@ -29,6 +29,6 @@ public class Roman {
 
     return result;
   }
-}
 
-record Element(String roman, int value) {}
+  record Element(String roman, int value) {}
+}
