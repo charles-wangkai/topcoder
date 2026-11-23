@@ -14,13 +14,13 @@ public class Encrypt_Test {
   record Output(String result) {}
 
   static List<Arguments> testCases() {
-    List<Arguments> crafted =
+    List<Arguments> examples =
         List.of(
             Arguments.of(new Input("TW"), new Output("WT")),
             Arguments.of(new Input("BQ"), new Output("EN")),
             Arguments.of(new Input("S9"), new Output("X4")));
 
-    return Stream.of(crafted).flatMap(List::stream).toList();
+    return Stream.of(examples).flatMap(List::stream).toList();
   }
 
   @ParameterizedTest
