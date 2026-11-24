@@ -62,6 +62,6 @@ public class GameCheck {
         .map(String::valueOf)
         .collect(Collectors.joining());
   }
-}
 
-record State(int digit1, int digit2) {}
+  record State(int digit1, int digit2) {}
+}
