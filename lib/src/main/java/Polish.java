@@ -37,7 +37,6 @@ public class Polish {
     return (int) stack.getLast();
   }
 
-  @FunctionalInterface
   interface Calculator {
     int calculate(int x, int y);
   }
